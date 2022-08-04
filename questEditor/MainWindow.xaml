@@ -1,0 +1,217 @@
+﻿<Window x:Class="questEditor.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Title="simpleQuestnameEditor" Height="600" Width="1000" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" FontFamily="Segoe UI Semilight">
+    <Grid>
+        <StackPanel>
+            <Menu>
+                <MenuItem Header="File">
+                    <MenuItem Header="Open" Name="act_Open" Click="act_Open_Click"/>
+                    <MenuItem Header="Save" Name="act_Save" Click="act_Save_Click" IsEnabled="False"/>
+                    <MenuItem Header="Exit" Name="act_Exit" Click="act_Exit_Click"/>
+                </MenuItem>
+                <MenuItem Header="Tools" Name="act_Tools">
+                    <MenuItem Header="Decrypt" Name="act_Decrypt" Click="act_Decrypt_Click"/>
+                    <MenuItem Header="Encrypt" Name="act_Encrypt" Click="act_Encrypt_Click"/>
+                </MenuItem>
+                <MenuItem Header="About" Name="act_About" Click="act_About_Click" RenderTransformOrigin="0.5,0.5"/>
+            </Menu>
+        </StackPanel>
+        <Label Content="Search by ID:" HorizontalAlignment="Left" Margin="10,27,0,0" VerticalAlignment="Top"/>
+        <TextBox PreviewTextInput="CheckForNumeric" x:Name="quest_Filter" HorizontalAlignment="Left" Height="20" Margin="88,29,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="80" TextChanged="quest_Filter_TextChanged" IsEnabled="False"/>
+        <ListView Margin="13,54,717,56" Name="list_Quest_List" SelectionChanged="list_Quest_List_SelectionChanged">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="50" DisplayMemberBinding="{Binding quest_id}" />
+                    <GridViewColumn Header="Prog" Width="50" DisplayMemberBinding="{Binding quest_prog}" />
+                    <GridViewColumn Header="Name" Width="164" DisplayMemberBinding="{Binding main_name}" />
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBox PreviewTextInput="CheckForNumeric" Name="new_Quest_ID" HorizontalAlignment="Left" Height="20" Margin="20,526,0,0"  VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+        <TextBox PreviewTextInput="CheckForNumeric" Name="new_Quest_Prog" HorizontalAlignment="Left" Height="20" Margin="99,526,0,0"  VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+        <Button x:Name="new_Quest_btn" Content="Create" HorizontalAlignment="Left" Margin="183,524,0,0" VerticalAlignment="Top" Width="80" Height="22" Click="new_Quest_btn_Click" IsEnabled="False"/>
+        <Label Content="ID:" HorizontalAlignment="Left" Margin="38,500,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.5,0.654"/>
+        <Label Content="Prog:" HorizontalAlignment="Left" Margin="108,500,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.605,-0.654"/>
+        <Button x:Name="del_Quest_btn" Content="Delete" HorizontalAlignment="Left" Margin="188,27,0,0" VerticalAlignment="Top" Width="75" Click="del_Quest_btn_Click" IsEnabled="False" Height="22"/>
+        <Grid HorizontalAlignment="Left" Height="536" Margin="268,25,0,0" VerticalAlignment="Top" Width="716">
+            <Label Content="Prog Name:" HorizontalAlignment="Left" Margin="20,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.077"/>
+            <Label Content="Prog ID:" HorizontalAlignment="Left" Margin="20,43,0,0" VerticalAlignment="Top"/>
+            <Label Content="Quest Name:" HorizontalAlignment="Left" Margin="20,89,0,0" VerticalAlignment="Top"/>
+            <Label Content="Quest ID:" HorizontalAlignment="Left" Margin="20,0,0,0" VerticalAlignment="Top"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Quest_ID" HorizontalAlignment="Left" Height="20" Margin="20,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Prog_ID" HorizontalAlignment="Left" Height="20" Margin="20,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox x:Name="ed_Quest_Name" HorizontalAlignment="Left" Height="20" Margin="20,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" IsEnabled="False"/>
+            <TextBox x:Name="ed_Prog_Name" HorizontalAlignment="Left" Height="20" Margin="20,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" IsEnabled="False"/>
+            <Button x:Name="save_Quest_btn" Content="Save Quest" HorizontalAlignment="Left" Margin="20,496,0,0" VerticalAlignment="Top" Width="120" Height="30" Click="save_Quest_btn_Click" IsEnabled="False" RenderTransformOrigin="0.738,0.455"/>
+            <Label Content="Description:" HorizontalAlignment="Left" Margin="20,257,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="ed_Description" HorizontalAlignment="Left" Height="82" Margin="20,283,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" IsEnabled="False" RenderTransformOrigin="0.475,0.05" VerticalScrollBarVisibility="Visible"/>
+            <Label Content="Short Description:" HorizontalAlignment="Left" Margin="20,365,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="ed_Short_Description" HorizontalAlignment="Left" Height="89" Margin="20,391,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" IsEnabled="False" RenderTransformOrigin="0.475,0.05" VerticalScrollBarVisibility="Visible"/>
+            <Label Content="Min Level:" HorizontalAlignment="Left" Margin="145,0,0,0" VerticalAlignment="Top"/>
+            <Label Content="Max Level:" HorizontalAlignment="Left" Margin="147,43,0,0" VerticalAlignment="Top"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Min_Level" HorizontalAlignment="Left" Height="20" Margin="147,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Max_Level" HorizontalAlignment="Left" Height="20" Margin="147,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <Label Content="Restrictions:" HorizontalAlignment="Left" Margin="20,186,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.479,-0.077"/>
+            <TextBox x:Name="ed_Restrictions" HorizontalAlignment="Left" Height="40" Margin="20,212,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="247" IsEnabled="False"/>
+            <Button x:Name="quest_Popup_btn" Content="?" HorizontalAlignment="Left" Margin="252,3,0,0" VerticalAlignment="Top" Width="15" Height="20" RenderTransformOrigin="2.35,0.85" Click="quest_Popup_btn_Click" FontSize="10"/>
+            <StackPanel Margin="20,0,0,0">
+                <Popup x:Name="popup_Info" StaysOpen="False" Placement="Mouse" MaxWidth="250"
+                 AllowsTransparency="True"  >
+                    <TextBlock TextWrapping="Wrap" Width="150" Background="LightGray">
+                        For add a new line symbol in string print - "\\n"
+                        <LineBreak/>
+                        <LineBreak/>
+                        String in unicode, must begin with a character - "u,"
+                    </TextBlock>
+                </Popup>
+            </StackPanel>
+            <Label Content="NPC ID:" HorizontalAlignment="Left" Margin="304,0,0,0" VerticalAlignment="Top"/>
+            <Label Content="Quest Type:" HorizontalAlignment="Left" Margin="371,0,0,0" VerticalAlignment="Top"/>
+            <ComboBox x:Name="ed_Quest_Type_combo" HorizontalAlignment="Left" Margin="371,24,0,0" VerticalAlignment="Top" Width="92" SelectionChanged="ed_Quest_Type_combo_SelectionChanged" IsEnabled="False">
+                <ComboBoxItem Name="Onetime">Onetime</ComboBoxItem>
+                <ComboBoxItem Name="Repeatable">Repeatable</ComboBoxItem>
+            </ComboBox>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_NPC_ID" HorizontalAlignment="Left" Height="20" Margin="305,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+            <Label Content="Entity Name:" HorizontalAlignment="Left" Margin="475,0,0,0" VerticalAlignment="Top"/>
+            <TextBox x:Name="ed_Entity_Name" HorizontalAlignment="Left" Height="20" Margin="475,26,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="220" IsEnabled="False"/>
+            <Label Content="Quest X:" HorizontalAlignment="Left" Margin="304,43,0,0" VerticalAlignment="Top"/>
+            <Label Content="Quest Y:" HorizontalAlignment="Left" Margin="448,43,0,0" VerticalAlignment="Top"/>
+            <Label Content="Quest Z:" HorizontalAlignment="Left" Margin="586,43,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.944,0.692"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Quest_X" HorizontalAlignment="Left" Height="20" Margin="304,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Quest_Y" HorizontalAlignment="Left" Height="20" Margin="448,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Quest_Z" HorizontalAlignment="Left" Height="20" Margin="586,69,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsEnabled="False"/>
+            <Label Content="NPC X:" HorizontalAlignment="Left" Margin="305,89,0,0" VerticalAlignment="Top"/>
+            <Label Content="NPC Y:" HorizontalAlignment="Left" Margin="448,89,0,0" VerticalAlignment="Top"/>
+            <Label Content="NPC Z:" HorizontalAlignment="Left" Margin="586,89,0,0" VerticalAlignment="Top"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_NPC_X" HorizontalAlignment="Left" Height="20" Margin="304,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_NPC_Y" HorizontalAlignment="Left" Height="20" Margin="448,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120" IsEnabled="False"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_NPC_Z" HorizontalAlignment="Left" Height="20" Margin="586,115,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="109" IsEnabled="False"/>
+            <Label Content="Required Items Count:" HorizontalAlignment="Left" Margin="448,257,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,2.615"/>
+            <ComboBox x:Name="ed_Quest_Req_Item_combo" HorizontalAlignment="Left" Margin="576,261,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,1.682" SelectionChanged="ed_Quest_Req_Item_combo_SelectionChanged" IsEnabled="False">
+                <ComboBoxItem Name="Zero">0</ComboBoxItem>
+                <ComboBoxItem Name="One">1</ComboBoxItem>
+                <ComboBoxItem Name="Two">2</ComboBoxItem>
+                <ComboBoxItem Name="Three">3</ComboBoxItem>
+                <ComboBoxItem Name="Four">4</ComboBoxItem>
+                <ComboBoxItem Name="Five">5</ComboBoxItem>
+            </ComboBox>
+            <Label Content="Item ID:" HorizontalAlignment="Left" Margin="307,301,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.216,0.5"/>
+            <Label Content="Item Count:" HorizontalAlignment="Left" Margin="304,327,0,0" VerticalAlignment="Top" Height="26"/>
+            <Grid HorizontalAlignment="Left" Height="67" Margin="385,283,0,0" VerticalAlignment="Top" Width="310">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23"></RowDefinition>
+                    <RowDefinition Height="22"></RowDefinition>
+                    <RowDefinition Height="44"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62"></ColumnDefinition>
+                    <ColumnDefinition Width="62"></ColumnDefinition>
+                    <ColumnDefinition Width="62"></ColumnDefinition>
+                    <ColumnDefinition Width="62"></ColumnDefinition>
+                    <ColumnDefinition Width="62"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+                <Label Content="Item 1:" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Item 2:" Grid.Column="1" Grid.Row="0"/>
+                <Label Content="Item 3:" Grid.Column="2" Grid.Row="0"/>
+                <Label Content="Item 4:" Grid.Column="3" Grid.Row="0"/>
+                <Label Content="Item 5:" Grid.Column="4" Grid.Row="0"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item1_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item2_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="1" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item3_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="2" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item4_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="3" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item5_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="4" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item1_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item2_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="1" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item3_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="2" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item4_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="3" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Item5_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="4" Margin="0,1,0,0" IsEnabled="False"/>
+            </Grid>
+            <Label Content="Reward Items Count:" HorizontalAlignment="Left" Margin="448,365,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,2.615"/>
+            <ComboBox x:Name="ed_Quest_Rew_Item_combo" HorizontalAlignment="Left" Margin="567,369,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,1.682" SelectionChanged="ed_Quest_Rew_Item_combo_SelectionChanged" IsEnabled="False">
+                <ComboBoxItem Name="Zero1">0</ComboBoxItem>
+                <ComboBoxItem x:Name="One1" Content="1"/>
+                <ComboBoxItem x:Name="Two1" Content="2"/>
+                <ComboBoxItem x:Name="Three1" Content="3"/>
+                <ComboBoxItem x:Name="Four1" Content="4"/>
+                <ComboBoxItem x:Name="Five1" Content="5"/>
+            </ComboBox>
+            <Grid HorizontalAlignment="Left" Height="67" Margin="385,391,0,0" VerticalAlignment="Top" Width="310">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23"/>
+                    <RowDefinition Height="22"/>
+                    <RowDefinition Height="44"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Item 1:" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Item 2:" Grid.Column="1" Grid.Row="0"/>
+                <Label Content="Item 3:" Grid.Column="2" Grid.Row="0"/>
+                <Label Content="Item 4:" Grid.Column="3" Grid.Row="0"/>
+                <Label Content="Item 5:" Grid.Column="4" Grid.Row="0"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item1_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item2_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="1" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item3_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="2" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item4_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="3" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item5_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="4" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item1_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item2_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="1" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item3_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="2" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item4_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="3" Margin="0,1,0,0" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Rew_Item5_cnt_txt" HorizontalAlignment="Left" Height="20" Grid.Row="2" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="4" Margin="0,1,0,0" IsEnabled="False"/>
+            </Grid>
+            <Label Content="Item ID:" HorizontalAlignment="Left" Margin="307,410,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.216,0.5"/>
+            <Label Content="Item Count:" HorizontalAlignment="Left" Margin="304,436,0,0" VerticalAlignment="Top" Height="26"/>
+            <ProgressBar HorizontalAlignment="Left" Height="20" Margin="385,503,0,0" VerticalAlignment="Top" Width="310" Minimum="0" Maximum="99" Name="pbStatus"/>
+            <TextBlock x:Name="pb_Encrypt_text" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="509,503,144,17" RenderTransformOrigin="-1,0.562" Visibility="Hidden"/>
+            <Label Content="Progress:" HorizontalAlignment="Left" Margin="323,501,0,0" VerticalAlignment="Top"/>
+            <Label Content="Encrypt/Decrypt" HorizontalAlignment="Left" Margin="492,477,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.883,0.423"/>
+            <Grid HorizontalAlignment="Left" Height="51" Margin="385,201,0,0" VerticalAlignment="Top" Width="310">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="23"/>
+                    <RowDefinition Height="22"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                    <ColumnDefinition Width="62"/>
+                </Grid.ColumnDefinitions>
+                <Label Content="Class 1:" Grid.Column="0" Grid.Row="0"/>
+                <Label Content="Class 2:" Grid.Column="1" Grid.Row="0"/>
+                <Label Content="Class 3:" Grid.Column="2" Grid.Row="0"/>
+                <Label Content="Class 4:" Grid.Column="3" Grid.Row="0"/>
+                <Label Content="Class 5:" Grid.Column="4" Grid.Row="0"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Class1_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Class2_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="1" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Class3_ID_txt" HorizontalAlignment="Left" Height="20" Margin="0" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="2" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Class4_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="3" IsEnabled="False"/>
+                <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Class5_ID_txt" HorizontalAlignment="Left" Height="20" Grid.Row="1" TextWrapping="Wrap" VerticalAlignment="Top" Width="60" Grid.Column="4" IsEnabled="False"/>
+              </Grid>
+            <Label Content="Class ID:" HorizontalAlignment="Left" Margin="304,226,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.216,0.5"/>
+            <Label Content="Required Class Count:" HorizontalAlignment="Left" Margin="448,181,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.508,2.615"/>
+            <ComboBox x:Name="ed_Quest_Req_Class_combo" HorizontalAlignment="Left" Margin="576,181,0,0" VerticalAlignment="Top" Width="40" RenderTransformOrigin="0.5,1.682" SelectionChanged="ed_Quest_Req_Class_combo_SelectionChanged" IsEnabled="False">
+                <ComboBoxItem x:Name="Zero2" Content="0"/>
+                <ComboBoxItem x:Name="One2" Content="1"/>
+                <ComboBoxItem x:Name="Two2" Content="2"/>
+                <ComboBoxItem x:Name="Three2" Content="3"/>
+                <ComboBoxItem x:Name="Four2" Content="4"/>
+                <ComboBoxItem x:Name="Five2" Content="5"/>
+            </ComboBox>
+            <Label Content="Area Id:" HorizontalAlignment="Left" Margin="305,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.49,1.115"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Area_ID" HorizontalAlignment="Left" Height="20" Margin="304,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+            <CheckBox x:Name="cb_Quest_Get_Item" Content="Get Item In Quest ?" HorizontalAlignment="Left" Margin="160,508,0,0" VerticalAlignment="Top" IsEnabled="False" Checked="cb_Quest_Get_Item_Checked"/>
+            <Label Content="Req Quest Complete:" HorizontalAlignment="Left" Margin="448,135,0,0" VerticalAlignment="Top" RenderTransformOrigin="0.49,1.115"/>
+            <TextBox PreviewTextInput="CheckForNumeric" x:Name="ed_Req_Quest_Complete" HorizontalAlignment="Left" Height="20" Margin="448,161,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="50" IsEnabled="False"/>
+        </Grid>
+    </Grid>
+</Window>
