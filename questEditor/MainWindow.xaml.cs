@@ -952,31 +952,17 @@ namespace questEditor
                 Filter = "Txt file (*.txt*)|*.txt"
             };
 
-            if ((bool)openFileDialog.ShowDialog())
+            if ((bool)openFileDialog.ShowDialog() && openFileDialog.FileName != string.Empty)
             {
-                if (openFileDialog.FileName != string.Empty)
+                decrypt_in = openFileDialog.FileName;
+                if ((bool)saveFileDialog.ShowDialog() && saveFileDialog.FileName != string.Empty)
                 {
-                    decrypt_in = openFileDialog.FileName;
-                    if ((bool)saveFileDialog.ShowDialog())
-                    {
-                        if (saveFileDialog.FileName != string.Empty)
-                        {
-                            decrypt_out = saveFileDialog.FileName;
-                            File_Decrypt();
-                        }
-                        else
-                        {
-                            _ = MessageBox.Show("Output file not selected.", "Info");
-                        }
-                    }
-                    else
-                    {
-                        _ = MessageBox.Show("Output file not selected.", "Info");
-                    }
+                    decrypt_out = saveFileDialog.FileName;
+                    File_Decrypt();
                 }
                 else
                 {
-                    _ = MessageBox.Show("Input file not selected.", "Info");
+                    _ = MessageBox.Show("Output file not selected.", "Info");
                 }
             }
             else
@@ -998,31 +984,17 @@ namespace questEditor
                 Filter = "DAT file (*.dat)|*.dat"
             };
 
-            if ((bool)openFileDialog.ShowDialog())
+            if ((bool)openFileDialog.ShowDialog() && openFileDialog.FileName != string.Empty)
             {
-                if (openFileDialog.FileName != string.Empty)
+                decrypt_in = openFileDialog.FileName;
+                if ((bool)saveFileDialog.ShowDialog() && saveFileDialog.FileName != string.Empty)
                 {
-                    encrypt_in = openFileDialog.FileName;
-                    if ((bool)saveFileDialog.ShowDialog())
-                    {
-                        if (saveFileDialog.FileName != string.Empty)
-                        {
-                            encrypt_out = saveFileDialog.FileName;
-                            File_Encrypt();
-                        }
-                        else
-                        {
-                            _ = MessageBox.Show("Output file not selected.", "Info");
-                        }
-                    }
-                    else
-                    {
-                        _ = MessageBox.Show("Output file not selected.", "Info");
-                    }
+                    decrypt_out = saveFileDialog.FileName;
+                    File_Encrypt();
                 }
                 else
                 {
-                    _ = MessageBox.Show("Input file not selected.", "Info");
+                    _ = MessageBox.Show("Output file not selected.", "Info");
                 }
             }
             else
