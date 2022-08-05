@@ -422,7 +422,12 @@ namespace questEditor
             string quest_prog = new_Quest_Prog.Text;
             if (quest_id != "" && quest_prog != "")
             {
-                QuestData new_quest = new QuestData("1\t" + quest_id + "\t" + quest_prog + "\ta,New Quest Name\\0\ta,New Prog Name\\0\ta,New Descriprion\\0\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0.00000000\t0.00000000\t0.00000000\t0\t0\t3\ta,New Entity\\0\t0\t1\t1\t0\t0.00000000\t0.00000000\t0.00000000\ta,New Restriction\\0\ta,New Short Description.\\0\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0\t\t\t\t\t\t0\t0\t0\t0\t0\t0\t\t\t\t\t\t\t\t\t\t\t\t0\t\t\t\t\t\t\t\t\t\t\t\t1\t0\t\t\t");
+                QuestData new_quest = new QuestData("1\t" + quest_id + "\t" + quest_prog + "\ta,New Quest Name\\0\ta,New Prog Name" +
+                    "\\0\ta,New Descriprion\\0\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0.00000000" +
+                    "\t0.00000000\t0.00000000\t0\t0\t3\ta,New Entity\\0\t0\t1\t1\t0\t0.00000000\t0.00000000\t0.00000000" +
+                    "\ta,New Restriction\\0\ta,New Short Description.\\0\t0\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0" +
+                    "\t\t\t\t\t\t0\t0\t0\t0\t0\t0\t\t\t\t\t\t\t\t\t\t\t\t0\t\t\t\t\t\t\t\t\t\t\t\t1\t0\t\t\t");
                 quest_list.Add(new_quest);
                 Reload_List();
                 list_Quest_List.SelectedItem = quest_list.Last();
@@ -986,10 +991,10 @@ namespace questEditor
 
             if ((bool)openFileDialog.ShowDialog() && openFileDialog.FileName != string.Empty)
             {
-                decrypt_in = openFileDialog.FileName;
+                encrypt_in = openFileDialog.FileName;
                 if ((bool)saveFileDialog.ShowDialog() && saveFileDialog.FileName != string.Empty)
                 {
-                    decrypt_out = saveFileDialog.FileName;
+                    encrypt_out = saveFileDialog.FileName;
                     File_Encrypt();
                 }
                 else
@@ -1055,6 +1060,8 @@ namespace questEditor
             }
             catch (Exception exx)
             {
+                Remove_Questname_File();
+                _ = MessageBox.Show("Decryption failed.", "Error");
                 Console.WriteLine(exx.Message);
             }
         }
@@ -1083,6 +1090,8 @@ namespace questEditor
             }
             catch (Exception exx)
             {
+                Remove_Questname_File();
+                _ = MessageBox.Show("Encryption failed.", "Error");
                 Console.WriteLine(exx.Message);
             }
         }

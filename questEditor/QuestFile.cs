@@ -10,26 +10,26 @@ namespace questEditor
     {
         private static readonly string string_start = "a,";
         private static readonly string string_end = "\\0";
-        public static List<QuestData> OpenFile(string path) //take a path to questname.txt anв return list of QuestData objects
+        public static List<QuestData> OpenFile(string path) //take a path to questname.txt and return list of QuestData objects
         {
             List<QuestData> quest_list = new List<QuestData>();
             string s;
             StreamReader f = new StreamReader(path);
             while (!f.EndOfStream)
             {
-                s = f.ReadLine(); // read a line from questname.txt
+                s = f.ReadLine(); //read a line from questname.txt
                 if (s.Contains("tag_?")) //if its first line with file structure, skeap it
                 {
                     continue;
                 }
-                quest_list.Add(new QuestData(s));//create new oject QuestaData object and add it in list
+                quest_list.Add(new QuestData(s)); //create new oject QuestaData object and add it in list
             }
             f.Close();
 
             return quest_list;
         }
 
-        public static bool SaveFile(List<QuestData> quest_list, string path)//take a list of QuestData objects and make questname.txt
+        public static bool SaveFile(List<QuestData> quest_list, string path) //take a list of QuestData objects and make questname.txt
         {
             bool result = true;
             string main_name;
